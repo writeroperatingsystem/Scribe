@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WriterOS is a lightweight, distraction-free operating system designed for writing.">
+  <title>WriterOS | Write Without Distractions</title>
+  <style>
+    :root {
+      --bg-dark: #111827;
+      --bg-dark-2: #1f2937;
+      --surface: #ffffff;
+      --surface-alt: #f3f4f6;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --border: #e5e7eb;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background: #fafafa;
+    }
+
+    a { color: inherit; }
+    .container { width: min(1120px, 90%); margin: 0 auto; }
+
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      place-items: center;
+      padding: 96px 20px;
+      color: #fff;
+      text-align: center;
+      background: linear-gradient(135deg, var(--bg-dark), var(--bg-dark-2));
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 6px 12px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 999px;
+      color: #dbeafe;
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 9vw, 5.5rem);
+      line-height: 1;
+      margin-bottom: 24px;
+      letter-spacing: -0.04em;
+    }
+
+    .hero .tagline {
+      max-width: 760px;
+      margin: 0 auto;
+      color: #e5e7eb;
+      font-size: clamp(1.1rem, 3vw, 1.45rem);
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 38px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 13px 24px;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: #fff; color: var(--accent-hover); }
+    .btn-primary:hover { background: #eff6ff; }
+    .btn-secondary { background: var(--accent); color: #fff; }
+    .btn-secondary:hover { background: var(--accent-hover); }
+    .btn-outline { border-color: rgba(255,255,255,.55); color: #fff; }
+    .btn-outline:hover { background: rgba(255,255,255,.08); }
+
+    section { padding: 82px 0; }
+    .alt { background: var(--surface-alt); }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(2rem, 5vw, 2.7rem);
+      line-height: 1.15;
+      margin-bottom: 18px;
+      letter-spacing: -0.025em;
+    }
+
+    .section-subtitle {
+      max-width: 760px;
+      margin: 0 auto 46px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 1.08rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 { margin-bottom: 12px; font-size: 1.25rem; }
+    .card p { color: var(--muted); }
+
+    .content-block { max-width: 820px; margin: 0 auto; }
+    .content-block p + p { margin-top: 18px; }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 20px;
+      margin: 28px 0;
+      list-style: none;
+    }
+
+    .checklist li {
+      position: relative;
+      padding: 15px 16px 15px 46px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 17px;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .status {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 24px;
+      border-left: 5px solid #f59e0b;
+      border-radius: 10px;
+      background: #fffbeb;
+    }
+
+    .status strong { display: block; margin-bottom: 6px; }
+
+    .download-box {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 42px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .release-label {
+      display: inline-block;
+      margin: 14px 0 20px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1e40af;
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .small-note { margin-top: 18px; color: var(--muted); font-size: .92rem; }
+
+    .donate {
+      color: #fff;
+      text-align: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+
+    .donate .section-title { color: #fff; }
+    .donate p { max-width: 760px; margin: 0 auto 18px; color: #d1d5db; }
+    .donate .btn { margin-top: 12px; }
+
+    footer {
+      padding: 42px 20px;
+      color: #fff;
+      text-align: center;
+      background: #0b1120;
+    }
+
+    footer p { margin-top: 6px; color: #9ca3af; }
+
+    @media (max-width: 820px) {
+      .features { grid-template-columns: 1fr; }
+      .checklist { grid-template-columns: 1fr; }
+      section { padding: 64px 0; }
+    }
+
+    @media (max-width: 520px) {
+      .hero { min-height: auto; padding: 78px 18px; }
+      .cta-buttons { flex-direction: column; }
+      .btn { width: 100%; }
+      .download-box { padding: 30px 22px; }
+      .card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <span class="eyebrow">Currently in Beta</span>
+      <h1>WriterOS</h1>
+      <p class="tagline">A minimalist operating system designed for one purpose: helping writers focus on writing.</p>
+      <div class="cta-buttons">
+        <a class="btn btn-primary" href="#download">Download Beta</a>
+        <a class="btn btn-outline" href="#donate">Support the Project</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <h2 class="section-title">Write Without Distractions</h2>
+        <p class="section-subtitle">Modern computers constantly compete for your attention. WriterOS removes the noise and lets you focus on your words.</p>
+        <div class="features">
+          <article class="card">
+            <h3>No Notifications</h3>
+            <p>No email alerts, social media notifications, or messaging apps. Just writing.</p>
+          </article>
+          <article class="card">
+            <h3>No Internet Distractions</h3>
+            <p>No endless browsing, videos, news feeds, games, or online rabbit holes.</p>
+          </article>
+          <article class="card">
+            <h3>A Focused Environment</h3>
+            <p>Turn a compatible computer into a dedicated writing machine in seconds.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="alt">
+      <div class="container">
+        <h2 class="section-title">Use Your Existing Computer</h2>
+        <div class="content-block">
+          <p>WriterOS runs directly from a USB flash drive. You can use it on your everyday computer without replacing Windows, macOS, or Linux.</p>
+          <ul class="checklist">
+            <li>Boot your computer from the WriterOS USB drive.</li>
+            <li>Write in a distraction-free environment.</li>
+            <li>Restart your computer when you are finished.</li>
+            <li>Return to your regular operating system.</li>
+            <li>Access and transfer your text files easily.</li>
+            <li>Keep your normal computer setup unchanged.</li>
+          </ul>
+          <p>Your writing remains accessible from your regular operating system without special software.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Bring Old Hardware Back to Life</h2>
+        <p class="section-subtitle">WriterOS has very low processor and memory requirements, making it suitable for many older computers.</p>
+        <div class="features">
+          <article class="card">
+            <h3>Extremely Lightweight</h3>
+            <p>Designed to operate with minimal processor power and memory.</p>
+          </article>
+          <article class="card">
+            <h3>No Hard Drive Required</h3>
+            <p>WriterOS operates from its USB drive, so the computer does not need an installed hard drive.</p>
+          </article>
+          <article class="card">
+            <h3>Repurpose an Old PC</h3>
+            <p>An older computer can become a simple and useful dedicated writing device.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="alt">
+      <div class="container">
+        <h2 class="section-title">Plain Text. Maximum Compatibility.</h2>
+        <div class="content-block">
+          <p>WriterOS saves documents as standard TXT files. Plain-text documents are small, simple, reliable, and easy to move between operating systems.</p>
+          <ul class="checklist">
+            <li>Fast to open and save</li>
+            <li>Easy to back up</li>
+            <li>Widely compatible</li>
+            <li>Free from proprietary formats</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Current Status</h2>
+        <div class="status">
+          <strong>WriterOS is currently in beta.</strong>
+          <p>The system is available for writing and testing, but it may still contain bugs. Features and behavior may change as development continues.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="download" class="alt">
+      <div class="container">
+        <h2 class="section-title">Download WriterOS</h2>
+        <p class="section-subtitle">Download the beta image and write it to a USB flash drive.</p>
+        <div class="download-box">
+          <h3>WriterOS Beta</h3>
+          <span class="release-label">Free Download</span>
+          <p>Attach the WriterOS image file to the same folder as this webpage and update the filename in the download link if necessary.</p>
+          <div class="cta-buttons">
+            <a class="btn btn-secondary" href="writeros.img" download>Download IMG</a>
+          </div>
+          <p class="small-note">Beta software is provided for testing. Back up important writing regularly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="donate" class="donate">
+      <div class="container">
+        <h2 class="section-title">Support WriterOS</h2>
+        <p>WriterOS is offered free of charge.</p>
+        <p>If it helps you focus, write more effectively, or give new life to old hardware, please consider supporting the project. Donations can help with development, testing, bug fixes, and future improvements.</p>
+        <a class="btn btn-primary" href="YOUR_PAYPAL_LINK_HERE" target="_blank" rel="noopener noreferrer">Donate with PayPal</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <h2>WriterOS</h2>
+    <p>Focus. Write. Create.</p>
+    <p>WriterOS is currently in beta.</p>
+  </footer>
+</body>
+</html>
